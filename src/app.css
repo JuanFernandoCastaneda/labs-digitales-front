@@ -1,0 +1,15 @@
+@font-face {
+	font-family: 'Noto Serif';
+	src: url('/fonts/NotoSerif-Regular.ttf');
+}
+
+body {
+	margin: 0;
+	font-family: 'Noto Serif';
+}
+
+html,
+body,
+body > div {
+	height: 100%;
+}
