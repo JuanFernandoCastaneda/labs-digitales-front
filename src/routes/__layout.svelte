@@ -1,12 +1,11 @@
 <script lang="ts">
-	import '../app.css';
-	import Icon from '$lib/components/icon.svelte';
-	import { session } from '$lib/stores/session';
+	import '../app.scss';
+	import { sesion } from '$lib/stores/sesion';
 </script>
 
 <nav>
 	<div>
-		<div id="nav-left">
+		<div id="nav-izquierda">
 			<a href="/" id="logo">
 				<img alt="Uniandes" height={62} src="/logo_uniandes.png" />
 			</a>
@@ -15,9 +14,9 @@
 			<a href="/opcion-2"> Opción 2 </a>
 			<a href="/laboratorios-experimentales"> Laboratorios experimentales </a>
 		</div>
-		<div id="nav-right">
-			{#if $session !== undefined}
-				<p>Bienvenido, {$session.username}</p>
+		<div id="nav-derecha">
+			{#if $sesion !== undefined}
+				<p>Bienvenido, {$sesion.nombreDeUsuario}</p>
 			{:else}
 				<a href="/login"> Login </a>
 			{/if}
@@ -36,9 +35,9 @@
 	main {
 		height: 92%;
 		margin: 0 auto;
-		width: max(70%, $medium-responsive);
+		width: max(70%, $mediano-responsive);
 
-		@media (max-width: $medium-responsive) {
+		@media (max-width: $mediano-responsive) {
 			width: 100%;
 		}
 
@@ -49,7 +48,6 @@
 
 	nav {
 		background-color: rgb(255, 242, 0);
-		filter: var(--shadow);
 		height: 8%;
 
 		& > div {
@@ -57,9 +55,9 @@
 			height: 100%;
 			margin: 0 auto;
 			text-align: center;
-			width: max(70%, $medium-responsive);
+			width: max(70%, $mediano-responsive);
 
-			@media (max-width: $medium-responsive) {
+			@media (max-width: $mediano-responsive) {
 				width: 100%;
 			}
 
@@ -69,7 +67,7 @@
 		}
 	}
 
-	#nav-left {
+	#nav-izquierda {
 		height: 100%;
 		margin-right: auto;
 
@@ -93,14 +91,19 @@
 		}
 	}
 
-	#nav-right {
+	#nav-derecha {
 		align-items: center;
 		display: flex;
 
 		& > a {
+			align-items: center;
+			color: inherit;
 			display: flex;
-			padding: 5px;
+			font-size: 15px;
+			height: 100%;
+			padding: 0 15px;
 			margin: auto 10px;
+			text-decoration: none;
 
 			&:hover {
 				background-color: rgb(255, 255, 255);

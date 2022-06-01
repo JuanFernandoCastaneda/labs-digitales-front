@@ -1,23 +1,27 @@
 <script lang="ts">
-	import { session } from '$lib/stores/session';
-	let username = '';
-	let password = '';
+	import { sesion } from '$lib/stores/sesion';
+	let nombreDeUsuario = '';
+	let contrasenia = '';
 
 	async function login(event: MouseEvent) {
 		event.preventDefault();
-		const body = new FormData();
-		body.append('username', username);
-		body.append('password', password);
 		const response = await fetch('http://127.0.0.1:8000/token', {
 			method: 'POST',
-			body
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				nombre_de_usuario: nombreDeUsuario,
+				contrasenia
+			})
 		});
 		if (response.ok) {
 			const token = await response.json();
-			session.set({
-				username,
-				token: token.access_token
+			sesion.set({
+				nombreDeUsuario,
+				token: `${token.tipo} ${token.token}`
 			});
+			localStorage.setItem('sesion', JSON.stringify($sesion));
 		}
 	}
 </script>
@@ -27,18 +31,18 @@
 		<h1>Iniciar sesión</h1>
 	</div>
 	<div>
-		<label for="username"> Usuario: </label>
+		<label for="nombre-de-usuario"> Usuario: </label>
 	</div>
 	<div>
-		<input bind:value={username} id="username" type="text" />
+		<input bind:value={nombreDeUsuario} id="nombre-de-usuario" type="text" />
 	</div>
 	<div>
-		<label for="password"> Contraseña: </label>
+		<label for="contrasenia"> Contraseña: </label>
 	</div>
 	<div>
-		<input bind:value={password} id="password" type="password" />
+		<input bind:value={contrasenia} id="contrasenia" type="password" />
 	</div>
-	<div id="login-button">
+	<div id="login">
 		<button on:click={login}> Iniciar sesión </button>
 	</div>
 </form>
@@ -62,25 +66,24 @@
 			}
 
 			& > input {
-  				border-radius: 5px;
+				border-radius: 5px;
 				box-sizing: border-box;
 				font-size: 20px;
 				margin-bottom: 15px;
 				padding: 5px 10px;
 				width: 100%;
 			}
-
 		}
-	}
 
-	#login-button {
-		text-align: center;
+		& > #login {
+			text-align: center;
 
-		& > button {
-			font-size: 20px;
-			font-family: inherit;
-			height: 40px;
-			width: 40%;
+			& button {
+				font-size: 20px;
+				font-family: inherit;
+				height: 40px;
+				width: 40%;
+			}
 		}
 	}
 </style>
