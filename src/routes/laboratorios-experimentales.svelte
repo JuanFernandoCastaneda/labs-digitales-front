@@ -8,6 +8,10 @@
 	let pagina = 0;
 	let departamento = '';
 
+	async function cambiarPagina(evento: any) {
+		console.log(evento.constructor.name)
+	}
+
 	async function buscarMaquinas(
 		pagina: number,
 		nombre: string,
@@ -47,9 +51,21 @@
 <div>
 	{#await buscarMaquinas(pagina, nombre, departamento) then maquinas}
 		{#each maquinas as maquina, index}
-			<Carta nombre={maquina.nombre} foto={maquina.foto} esFinalDeLinea={index % 2 === 1} fecha={maquina.fecha} />
+			<Carta
+				nombre={maquina.nombre}
+				foto={maquina.foto}
+				esFinalDeLinea={index % 2 === 1}
+				fecha={maquina.fecha}
+			/>
 		{/each}
 	{/await}
+</div>
+<div id="paginacion">
+	<button class="paginacion-izquierda">&lt;</button>
+	<button class="paginacion-izquierda">1</button>
+	<div contenteditable on:change={cambiarPagina}>{pagina}</div>
+	<button class="paginacion-derecha">3</button>
+	<button class="paginacion-derecha">&gt;</button>
 </div>
 
 <style lang="scss">
@@ -67,5 +83,32 @@
 		display: flex;
 		padding: 20px;
 		margin: 0 0 50px 0;
+	}
+
+	#paginacion {
+		display: flex;
+		justify-content: center;
+
+		& > button {
+			background: none;
+			border-width: 1px;
+			font: inherit;
+			font-size: 20px;
+			padding: 5px 10px;
+
+			&.paginacion-derecha {
+				border-left: 0;
+			}
+
+			&.paginacion-izquierda {
+				border-right: 0;
+			}
+		}
+
+		& > input {
+			background: none;
+			border-width: 1px;
+
+		}
 	}
 </style>

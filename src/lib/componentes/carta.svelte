@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Icono from "./icono.svelte";
-	import {iconoReserva} from "$lib/modelos/icono"
+	import Icono from './icono.svelte';
+	import { iconoReserva } from '$lib/modelos/icono';
 
 	export let foto = '/seneca.png';
 	export let nombre = 'Seneca';
@@ -11,7 +11,7 @@
 <div class={`carta ${esFinalDeLinea ? 'final-de-linea' : ''}`}>
 	{#if fecha}
 		<span>
-			<Icono icono={iconoReserva}/>
+			<Icono icono={iconoReserva} />
 		</span>
 	{/if}
 	<h2>{nombre}</h2>
@@ -54,7 +54,6 @@
 
 			&:last-child {
 				margin: 0 auto 0 auto;
-
 			}
 		}
 

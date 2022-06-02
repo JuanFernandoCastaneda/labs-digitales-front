@@ -3,8 +3,8 @@
 	let nombreDeUsuario = '';
 	let contrasenia = '';
 
-	async function login(event: MouseEvent) {
-		event.preventDefault();
+	async function login(evento: MouseEvent) {
+		evento.preventDefault();
 		const response = await fetch('http://127.0.0.1:8000/token', {
 			method: 'POST',
 			headers: {
