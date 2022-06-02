@@ -2,6 +2,7 @@
 	import Icono from './icono.svelte';
 	import { iconoReserva } from '$lib/modelos/icono';
 
+	export let id = 1;
 	export let foto = '/seneca.png';
 	export let nombre = 'Seneca';
 	export let esFinalDeLinea = true;
@@ -16,7 +17,7 @@
 	{/if}
 	<h2>{nombre}</h2>
 	<img alt={nombre} src={foto} />
-	<button>Mas información</button>
+	<button on:click={() => window.location.href =`/maquina/${id}`}>Mas información</button>
 	<button>Reservar</button>
 	<button>Acceder</button>
 </div>
@@ -45,6 +46,7 @@
 		}
 
 		& > button {
+			cursor: pointer;
 			background: rgb(97, 185, 83);
 			border: 0;
 			color: rgb(255, 255, 255);

@@ -5,11 +5,18 @@
 	import { browser } from '$app/env';
 
 	let nombre = '';
-	let pagina = 0;
+	let pagina = 1;
 	let departamento = '';
+	let total = 0;
 
-	async function cambiarPagina(evento: any) {
-		console.log(evento.constructor.name)
+	async function cambiarPagina(evento: Event) {
+		evento.preventDefault();
+		if (!evento.target) return;
+		const valor = parseInt((evento.target as HTMLInputElement).value);
+		if (isNaN(valor) || valor < 1) {
+			return pagina = 1;
+		}
+		pagina = valor > total ? total : valor;
 	}
 
 	async function buscarMaquinas(
@@ -17,7 +24,10 @@
 		nombre: string,
 		departamento: string
 	): Promise<Maquina[]> {
-		if (!browser) return [];
+		if (!browser) {
+			total = 1;
+			return [];
+		};
 		const headers: any = {
 			'Content-Type': 'application/json'
 		};
@@ -28,12 +38,14 @@
 			method: 'POST',
 			headers,
 			body: JSON.stringify({
-				pagina,
+				pagina: pagina - 1,
 				nombre,
 				departamento
 			})
 		});
-		return await peticion.json();
+		const respuesta = await peticion.json();
+		total = respuesta.total;
+		return respuesta.maquinas;
 	}
 </script>
 
@@ -52,6 +64,7 @@
 	{#await buscarMaquinas(pagina, nombre, departamento) then maquinas}
 		{#each maquinas as maquina, index}
 			<Carta
+				id={maquina.id}
 				nombre={maquina.nombre}
 				foto={maquina.foto}
 				esFinalDeLinea={index % 2 === 1}
@@ -61,11 +74,13 @@
 	{/await}
 </div>
 <div id="paginacion">
-	<button class="paginacion-izquierda">&lt;</button>
-	<button class="paginacion-izquierda">1</button>
-	<div contenteditable on:change={cambiarPagina}>{pagina}</div>
-	<button class="paginacion-derecha">3</button>
-	<button class="paginacion-derecha">&gt;</button>
+	{#if pagina > 1}
+		<button id="paginacion-izquierda" on:click={() => pagina--}>&lt;</button>
+	{/if}
+	<input on:input={cambiarPagina} bind:value={pagina} />
+	{#if pagina < total}
+		<button id="paginacion-derecha" on:click={() => pagina++}>&gt;</button>
+	{/if}
 </div>
 
 <style lang="scss">
@@ -95,12 +110,13 @@
 			font: inherit;
 			font-size: 20px;
 			padding: 5px 10px;
+			cursor: pointer;
 
-			&.paginacion-derecha {
+			&#paginacion-derecha {
 				border-left: 0;
 			}
 
-			&.paginacion-izquierda {
+			&#paginacion-izquierda {
 				border-right: 0;
 			}
 		}
@@ -108,7 +124,11 @@
 		& > input {
 			background: none;
 			border-width: 1px;
-
+			flex-grow: 0;
+			font: inherit;
+			padding: 5px 10px;
+			text-align: center;
+			width: 11px;
 		}
 	}
 </style>
