@@ -1,6 +1,6 @@
 export interface Maquina {
 	id: number;
-	departamento: string;
+	departamento: number;
 	nombre: string;
 	materia: string;
 	descripcion: string;

@@ -6,7 +6,7 @@
 
 	let nombre = '';
 	let pagina = 1;
-	let departamento = '';
+	let departamento = 0;
 	let total = 0;
 
 	async function cambiarPagina(evento: Event) {
@@ -22,7 +22,7 @@
 	async function buscarMaquinas(
 		pagina: number,
 		nombre: string,
-		departamento: string
+		departamento: number
 	): Promise<Maquina[]> {
 		if (!browser) {
 			total = 1;
@@ -53,11 +53,11 @@
 <div id="barra-de-busqueda">
 	<input bind:value={nombre} placeholder="Buscar máquina" type="text" />
 	<select bind:value={departamento}>
-		<option value=""> Todos los departamentos </option>
-		<option value="fisica"> Departamento de Física </option>
-		<option value="quimica"> Departamento de Química </option>
-		<option value=""> Departamento de Ingeniería Civil </option>
-		<option value=""> Departamento de Ingeniería Química </option>
+		<option value={0}> Todos los departamentos </option>
+		<option value={1}> Departamento de Física </option>
+		<option value={2}> Departamento de Química </option>
+		<option value={3}> Departamento de Ingeniería Civil </option>
+		<option value={4}> Departamento de Ingeniería Química </option>
 	</select>
 </div>
 <div>
