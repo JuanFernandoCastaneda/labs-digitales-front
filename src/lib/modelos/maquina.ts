@@ -7,3 +7,10 @@ export interface Maquina {
 	foto: string;
 	fecha: Date | undefined;
 }
+
+export interface Tension {
+	constante: number;
+	minima: number;
+	maxima: number;
+	incremento: number;
+}

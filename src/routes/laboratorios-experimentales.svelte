@@ -14,7 +14,7 @@
 		if (!evento.target) return;
 		const valor = parseInt((evento.target as HTMLInputElement).value);
 		if (isNaN(valor) || valor < 1) {
-			return pagina = 1;
+			return (pagina = 1);
 		}
 		pagina = valor > total ? total : valor;
 	}
@@ -27,8 +27,8 @@
 		if (!browser) {
 			total = 1;
 			return [];
-		};
-		const headers: any = {
+		}
+		const headers: Record<string, string> = {
 			'Content-Type': 'application/json'
 		};
 		if ($sesion) {

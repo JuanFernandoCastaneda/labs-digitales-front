@@ -17,9 +17,9 @@
 	{/if}
 	<h2>{nombre}</h2>
 	<img alt={nombre} src={foto} />
-	<button on:click={() => window.location.href =`/maquina/${id}`}>Mas información</button>
+	<button on:click={() => (window.location.href = `/maquina/${id}`)}>Mas información</button>
 	<button>Reservar</button>
-	<button>Acceder</button>
+	<button on:click={() => (window.location.href = `/practica/${id}`)}>Acceder</button>
 </div>
 
 <style lang="scss">
