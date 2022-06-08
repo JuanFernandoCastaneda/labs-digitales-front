@@ -6,10 +6,10 @@
 <nav>
 	<div>
 		<div id="nav-izquierda">
-			<a href="/" id="logo">
-				<img alt="Uniandes" height={62} src="/logo_uniandes.png" />
+			<a href="https://uniandes.edu.co/" id="logo">
+				<img alt="Uniandes" height={30} src="/logo_uniandes.png" />
 			</a>
-			<a href="/laboratorios-digitales"> Laboratorios digitales </a>
+			<a href="/"> Laboratorios digitales </a>
 			<a href="/opcion-1"> Opción 1 </a>
 			<a href="/opcion-2"> Opción 2 </a>
 			<a href="/laboratorios-experimentales"> Laboratorios experimentales </a>
