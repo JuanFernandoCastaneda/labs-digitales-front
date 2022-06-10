@@ -60,16 +60,10 @@
 		<option value={4}> Departamento de Ingeniería Química </option>
 	</select>
 </div>
-<div>
+<div id="contenido">
 	{#await buscarMaquinas(pagina, nombre, departamento) then maquinas}
-		{#each maquinas as maquina, index}
-			<Carta
-				id={maquina.id}
-				nombre={maquina.nombre}
-				foto={maquina.foto}
-				esFinalDeLinea={index % 2 === 1}
-				fecha={maquina.fecha}
-			/>
+		{#each maquinas as maquina}
+			<Carta id={maquina.id} nombre={maquina.nombre} foto={maquina.foto} fecha={maquina.fecha} />
 		{/each}
 	{/await}
 </div>
@@ -89,15 +83,27 @@
 		margin-top: 0;
 	}
 
-	input {
-		flex-grow: 1;
+	#barra-de-busqueda {
+		display: flex;
+		margin: 0 0 40px 0;
+		& > input {
+			border: 1px solid rgb(137, 137, 137);
+			border-radius: 8px 0 0 8px;
+			flex-grow: 1;
+			filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+		}
+
+		& > select {
+			border: 1px solid rgb(137, 137, 137);
+			border-radius: 0 8px 8px 0;
+			filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+		}
 	}
 
-	#barra-de-busqueda {
-		background: rgb(246, 115, 115);
-		display: flex;
-		padding: 20px;
-		margin: 0 0 50px 0;
+	#contenido {
+		display: grid;
+		gap: 20px;
+		grid-template-columns: 1fr 1fr;
 	}
 
 	#paginacion {

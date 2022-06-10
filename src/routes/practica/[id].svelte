@@ -20,98 +20,34 @@
 </script>
 
 <script lang="ts">
+	import Tension from '$lib/componentes/practica/tension.svelte';
 	import type { Maquina } from '$lib/modelos/maquina';
+	import Medida from '$lib/componentes/practica/medida.svelte';
+	import ModoRotativ from '$lib/componentes/practica/modo-rotativ.svelte';
 
 	export let maquina: Maquina;
-	let esConstante = true;
 </script>
 
 <h1>
 	{maquina.nombre}
 </h1>
 
-<div id="tension">
-	<h3>Tensión</h3>
-	<table>
-		<tr>
-			<td>
-				<input bind:group={esConstante} value={true} type="radio" />
-			</td>
-			<td> Tensión constante </td>
-			<td class="tesion-valor">
-				<input disabled={!esConstante} placeholder="0" type="number" />
-			</td>
-			<td> KV </td>
-		</tr>
-		<tr>
-			<td>
-				<input bind:group={esConstante} value={false} type="radio" />
-			</td>
-			<td> Tensión variable </td>
-			<td />
-			<td />
-		</tr>
-		<tr>
-			<td />
-			<td> Tensión máxima </td>
-			<td class="tesion-valor">
-				<input disabled={esConstante} placeholder="0" type="number" />
-			</td>
-			<td> KV </td>
-		</tr>
-		<tr>
-			<td />
-			<td> Tensión mínima </td>
-			<td class="tesion-valor">
-				<input disabled={esConstante} placeholder="0" type="number" />
-			</td>
-			<td> KV </td>
-		</tr>
-		<tr>
-			<td />
-			<td> Aumento de tensión </td>
-			<td class="tesion-valor">
-				<input disabled={esConstante} placeholder="0" type="number" />
-			</td>
-			<td> KV </td>
-		</tr>
-	</table>
+<div id="configuracion">
+	<Medida />
+
+	<Tension />
+
+	<ModoRotativ />
 </div>
 
 <style lang="scss">
 	h1 {
 		text-align: center;
 	}
-	#tension {
-		background: rgb(196, 196, 196);
-		padding: 20px;
 
-		& > h3 {
-			text-align: center;
-		}
-
-		& > table {
-			width: 100%;
-
-			& > tr {
-				& > :nth-child(1) {
-					text-align: center;
-				}
-				& > :nth-child(2) {
-					text-align: left;
-				}
-				& > :nth-child(3) {
-					width: 50%;
-
-					& > input {
-						width: 100%;
-						box-sizing: border-box;
-					}
-				}
-				& > :nth-child(4) {
-					text-align: center;
-				}
-			}
-		}
+	#configuracion {
+		display: grid;
+		gap: 20px;
+		grid-template-columns: 2fr 3fr;
 	}
 </style>

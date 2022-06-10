@@ -5,11 +5,10 @@
 	export let id = 1;
 	export let foto = '/seneca.png';
 	export let nombre = 'Seneca';
-	export let esFinalDeLinea = true;
 	export let fecha: Date | undefined;
 </script>
 
-<div class={`carta ${esFinalDeLinea ? 'final-de-linea' : ''}`}>
+<div class="carta">
 	{#if fecha}
 		<span>
 			<Icono icono={iconoReserva} />
@@ -24,19 +23,16 @@
 
 <style lang="scss">
 	.carta {
-		background: rgb(196, 196, 196);
-		display: inline-grid;
-		margin: 0 10% 50px 0;
+		background: rgb(239, 239, 239);
+		border: 2px solid rgb(196, 196, 196);
+		border-radius: 25px;
+		filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+		margin: 0 0 20px 0;
 		padding: 20px;
 		text-align: center;
-		width: calc(45% - 40px);
 
 		& > h2 {
 			margin: 0 0 20px 0;
-		}
-
-		&.final-de-linea {
-			margin: 0 0 50px 0;
 		}
 
 		& > img {
@@ -47,8 +43,8 @@
 
 		& > button {
 			cursor: pointer;
-			background: rgb(97, 185, 83);
-			border: 0;
+			background: rgba(137, 137, 137, 1);
+			border: 1px solid rgba(137, 137, 137, 1);
 			color: rgb(255, 255, 255);
 			margin: 0 auto 10px auto;
 			text-align: center;

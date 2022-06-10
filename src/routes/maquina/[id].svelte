@@ -26,24 +26,19 @@
 </script>
 
 <h1>
-	{maquina.nombre}
+	información {maquina.nombre}
 </h1>
 <div id="maquina">
 	<div id="imagen-maquina">
 		<img alt={maquina.nombre} src={maquina.foto} />
 	</div>
-	<div id="contenido-maquina">
-		<div>
-			<p>
-				{maquina.descripcion}
-			</p>
-		</div>
-		<div>
-			<button> Reservar </button>
-		</div>
-		<div>
-			<button> Acceder </button>
-		</div>
+	<div id="descripcion-maquina">
+		<h2>
+			Descripción
+		</h2>
+		<p>
+			{maquina.descripcion}
+		</p>
 	</div>
 </div>
 
@@ -54,36 +49,22 @@
 	}
 
 	#maquina {
-		display: flex;
-		text-align: center;
+		display: grid;
+		gap: 20px;
+		grid-template-columns: 2fr 3fr;
+		background: rgba(239, 239, 239, 1);
+		border: 1px solid rgb(137, 137, 137);
 
-		& > #contenido-maquina {
-			width: 50%;
-
-			& > div > p {
-				text-align: justify;
-				margin: 0 0 30px 0;
-			}
-
-			& > div > button {
-				cursor: pointer;
-				background: rgb(97, 185, 83);
-				border: 0;
-				color: rgb(255, 255, 255);
-				margin: 0 auto 10px auto;
-				text-align: center;
-				width: 50%;
-			}
+		& > #descripcion-maquina {
+			padding: 0 10px;
 		}
 
 		& > #imagen-maquina {
-			display: flex;
-			width: 50%;
-
+			border: 10px solid rgb(137, 137, 137);
+			
 			& > img {
 				margin: 0 auto;
 				max-width: 100%;
-				height: 25vh;
 			}
 		}
 	}
