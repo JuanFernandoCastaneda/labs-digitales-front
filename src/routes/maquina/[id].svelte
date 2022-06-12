@@ -26,7 +26,7 @@
 </script>
 
 <h1>
-	información {maquina.nombre}
+	Información {maquina.nombre}
 </h1>
 <div id="maquina">
 	<div id="imagen-maquina">

@@ -9,7 +9,7 @@
 			<td>
 				<input bind:group={modo} value={0} type="radio" />
 			</td>
-			<td> Modo acoplado </td>
+			<td> Modo acoplado 2:1 </td>
 		</tr>
 		<tr>
 			<td>
@@ -20,14 +20,8 @@
 		<tr>
 			<td />
 			<td class="tesion-valor">
-				<input disabled={modo !== 1} placeholder="0" type="number" />
+				<input disabled={modo !== 1} placeholder="22.6" type="number" />
 			</td>
-		</tr>
-		<tr>
-			<td>
-				<input bind:group={modo} value={2} type="radio" />
-			</td>
-			<td> Los dos ángulos const </td>
 		</tr>
 	</table>
 </div>

@@ -24,6 +24,9 @@
 	import type { Maquina } from '$lib/modelos/maquina';
 	import Medida from '$lib/componentes/practica/medida.svelte';
 	import ModoRotativ from '$lib/componentes/practica/modo-rotativ.svelte';
+import AnguloCristal from '$lib/componentes/practica/angulo-cristal.svelte';
+import CorrienteTiempo from '$lib/componentes/practica/corriente-tiempo.svelte';
+import ParametrosFijos from '$lib/componentes/practica/parametros-fijos.svelte';
 
 	export let maquina: Maquina;
 </script>
@@ -33,11 +36,10 @@
 </h1>
 
 <div id="configuracion">
-	<Medida />
-
+	<ParametrosFijos/>
 	<Tension />
-
-	<ModoRotativ />
+	<CorrienteTiempo />
+	<AnguloCristal />
 </div>
 
 <style lang="scss">

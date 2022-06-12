@@ -11,9 +11,9 @@
 			</td>
 			<td> Tensión constante </td>
 			<td class="tesion-valor">
-				<input disabled={tipo !== 0} placeholder="0" type="number" />
+				<input disabled={tipo !== 0} placeholder="30" type="number" />
 			</td>
-			<td> KV </td>
+			<td> kV </td>
 		</tr>
 		<tr>
 			<td>
@@ -27,25 +27,25 @@
 			<td />
 			<td> Tensión máxima </td>
 			<td class="tesion-valor">
-				<input disabled={tipo !== 1} placeholder="0" type="number" />
+				<input disabled={tipo !== 1} placeholder="35" type="number" />
 			</td>
-			<td> KV </td>
+			<td> kV </td>
 		</tr>
 		<tr>
 			<td />
 			<td> Tensión mínima </td>
 			<td class="tesion-valor">
-				<input disabled={tipo !== 1} placeholder="0" type="number" />
+				<input disabled={tipo !== 1} placeholder="5" type="number" />
 			</td>
-			<td> KV </td>
+			<td> kV </td>
 		</tr>
 		<tr>
 			<td />
-			<td> Aumento de tensión </td>
+			<td> Incremento de tensión </td>
 			<td class="tesion-valor">
-				<input disabled={tipo !== 1} placeholder="0" type="number" />
+				<input disabled={tipo !== 1} placeholder="10" type="number" />
 			</td>
-			<td> KV </td>
+			<td> kV </td>
 		</tr>
 	</table>
 </div>
