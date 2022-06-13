@@ -22,11 +22,9 @@
 <script lang="ts">
 	import Tension from '$lib/componentes/practica/tension.svelte';
 	import type { Maquina } from '$lib/modelos/maquina';
-	import Medida from '$lib/componentes/practica/medida.svelte';
-	import ModoRotativ from '$lib/componentes/practica/modo-rotativ.svelte';
-import AnguloCristal from '$lib/componentes/practica/angulo-cristal.svelte';
-import CorrienteTiempo from '$lib/componentes/practica/corriente-tiempo.svelte';
-import ParametrosFijos from '$lib/componentes/practica/parametros-fijos.svelte';
+	import AnguloCristal from '$lib/componentes/practica/angulo-cristal.svelte';
+	import CorrienteTiempo from '$lib/componentes/practica/corriente-tiempo.svelte';
+	import ParametrosFijos from '$lib/componentes/practica/parametros-fijos.svelte';
 
 	export let maquina: Maquina;
 </script>
@@ -42,6 +40,12 @@ import ParametrosFijos from '$lib/componentes/practica/parametros-fijos.svelte';
 	<AnguloCristal />
 </div>
 
+<div id="botones">
+	<button>
+		Computar
+	</button>	
+</div>
+
 <style lang="scss">
 	h1 {
 		text-align: center;
@@ -50,6 +54,13 @@ import ParametrosFijos from '$lib/componentes/practica/parametros-fijos.svelte';
 	#configuracion {
 		display: grid;
 		gap: 20px;
-		grid-template-columns: 2fr 3fr;
+		grid-template-columns: 3fr 4fr;
 	}
+
+	#botones {
+		margin-top: 20px;
+		display: flex;
+		justify-content: center;
+	}
+
 </style>
