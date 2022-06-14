@@ -5,7 +5,7 @@
 		fetch,
 		params
 	}: LoadInput): Promise<LoadOutput<Record<string, Maquina>>> {
-		const peticion = await fetch(`http://127.0.0.1:8000/maquinas/${params.id}`, {
+		const peticion = await fetch(`${import.meta.env.VITE_BACKEND_URL}/maquinas/${params.id}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
@@ -22,11 +22,36 @@
 <script lang="ts">
 	import Tension from '$lib/componentes/practica/tension.svelte';
 	import type { Maquina } from '$lib/modelos/maquina';
+	import { sesion } from '$lib/stores/sesion';
 	import AnguloCristal from '$lib/componentes/practica/angulo-cristal.svelte';
 	import CorrienteTiempo from '$lib/componentes/practica/corriente-tiempo.svelte';
 	import ParametrosFijos from '$lib/componentes/practica/parametros-fijos.svelte';
 
 	export let maquina: Maquina;
+
+	async function computar() {
+		if (!$sesion) {
+			return;
+		}
+		const headers: Record<string, string> = {
+			'Content-Type': 'application/json',
+			'Authorization': $sesion.token
+		};
+		await fetch(`${import.meta.env.VITE_BACKEND_URL}/rayos_x/`, {
+			method: 'POST',
+			headers,
+			body: JSON.stringify({
+				corriente: 0.0,
+				tiempo: 0,
+				tension_arranque: 0,
+				angulo_arranque: 0,
+				tension_parada: 0,
+				tension_incremento: 0,
+				angulo_parada: 0,
+				angulo_incremento: 0.0
+			})
+		});
+	}
 </script>
 
 <h1>
@@ -41,7 +66,7 @@
 </div>
 
 <div id="botones">
-	<button>
+	<button on:click={computar}>
 		Computar
 	</button>	
 </div>

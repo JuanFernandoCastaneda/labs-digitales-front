@@ -34,7 +34,7 @@
 		if ($sesion) {
 			headers['Authorization'] = $sesion.token;
 		}
-		const peticion = await fetch(`http://127.0.0.1:8000/maquinas${$sesion ? '' : '/anonimo'}`, {
+		const peticion = await fetch(`${import.meta.env.VITE_BACKEND_URL}/maquinas${$sesion ? '' : '/anonimo'}`, {
 			method: 'POST',
 			headers,
 			body: JSON.stringify({

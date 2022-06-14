@@ -5,7 +5,7 @@
 
 	async function login(evento: MouseEvent) {
 		evento.preventDefault();
-		const response = await fetch('http://127.0.0.1:8000/token', {
+		const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/token`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

@@ -57,6 +57,7 @@
 
 		& > span {
 			position: absolute;
+			right: 20px;
 		}
 	}
 </style>
