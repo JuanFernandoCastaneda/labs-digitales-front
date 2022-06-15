@@ -1,15 +1,20 @@
 <script lang="ts">
-	let tipo = 0;
+	import { practicaRayosX } from '$lib/stores/rayosX';
 </script>
 
 <div id="angulo-cristal">
 	<h3>Ángulo del cristal</h3>
 	<table>
 		<tr>
-			<td/>
+			<td />
 			<td> Ángulo de arranque </td>
 			<td class="tesion-valor">
-				<input placeholder="19" type="number" />
+				<input
+					required
+					bind:value={$practicaRayosX.angulo_arranque}
+					placeholder="19"
+					type="number"
+				/>
 			</td>
 			<td> ° </td>
 		</tr>
@@ -17,7 +22,7 @@
 			<td />
 			<td> Ángulo de parada </td>
 			<td class="tesion-valor">
-				<input placeholder="24" type="number" />
+				<input required bind:value={$practicaRayosX.angulo_parada} placeholder="24" type="number" />
 			</td>
 			<td> ° </td>
 		</tr>
@@ -25,7 +30,12 @@
 			<td />
 			<td> Incremento del ángulo </td>
 			<td class="tesion-valor">
-				<input placeholder="0.1" type="number" />
+				<input
+					required
+					bind:value={$practicaRayosX.angulo_incremento}
+					placeholder="0.1"
+					type="number"
+				/>
 			</td>
 			<td> ° </td>
 		</tr>

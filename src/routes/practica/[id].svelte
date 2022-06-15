@@ -26,30 +26,23 @@
 	import AnguloCristal from '$lib/componentes/practica/angulo-cristal.svelte';
 	import CorrienteTiempo from '$lib/componentes/practica/corriente-tiempo.svelte';
 	import ParametrosFijos from '$lib/componentes/practica/parametros-fijos.svelte';
+	import { practicaRayosX, verificarPractica } from '$lib/stores/rayosX';
 
 	export let maquina: Maquina;
 
-	async function computar() {
-		if (!$sesion) {
+	async function computar(evento: Event) {
+		if (!verificarPractica($practicaRayosX) || !$sesion) {
 			return;
 		}
+		evento.preventDefault();
 		const headers: Record<string, string> = {
 			'Content-Type': 'application/json',
-			'Authorization': $sesion.token
+			Authorization: $sesion.token
 		};
 		await fetch(`${import.meta.env.VITE_BACKEND_URL}/rayos_x/`, {
 			method: 'POST',
 			headers,
-			body: JSON.stringify({
-				corriente: 0.0,
-				tiempo: 0,
-				tension_arranque: 0,
-				angulo_arranque: 0,
-				tension_parada: 0,
-				tension_incremento: 0,
-				angulo_parada: 0,
-				angulo_incremento: 0.0
-			})
+			body: JSON.stringify($practicaRayosX)
 		});
 	}
 </script>
@@ -58,18 +51,18 @@
 	{maquina.nombre}
 </h1>
 
-<div id="configuracion">
-	<ParametrosFijos/>
-	<Tension />
-	<CorrienteTiempo />
-	<AnguloCristal />
-</div>
+<form>
+	<div id="configuracion">
+		<ParametrosFijos />
+		<Tension />
+		<CorrienteTiempo />
+		<AnguloCristal />
+	</div>
 
-<div id="botones">
-	<button on:click={computar}>
-		Computar
-	</button>	
-</div>
+	<div id="botones">
+		<button on:click={computar}> Computar </button>
+	</div>
+</form>
 
 <style lang="scss">
 	h1 {
@@ -87,5 +80,4 @@
 		display: flex;
 		justify-content: center;
 	}
-
 </style>

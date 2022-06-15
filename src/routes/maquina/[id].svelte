@@ -33,9 +33,7 @@
 		<img alt={maquina.nombre} src={maquina.foto} />
 	</div>
 	<div id="descripcion-maquina">
-		<h2>
-			Descripción
-		</h2>
+		<h2>Descripción</h2>
 		<p>
 			{maquina.descripcion}
 		</p>
@@ -61,7 +59,7 @@
 
 		& > #imagen-maquina {
 			border: 10px solid rgb(137, 137, 137);
-			
+
 			& > img {
 				margin: 0 auto;
 				max-width: 100%;

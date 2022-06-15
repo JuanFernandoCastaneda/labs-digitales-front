@@ -1,49 +1,45 @@
-<script lang="ts">
-	let tipo = 0;
-</script>
-
 <div id="parametros-fijos">
 	<h3>Parámetros fijos</h3>
 	<table>
 		<tr>
-			<td/>
+			<td />
 			<td> Tipo de medida </td>
 			<td class="tesion-valor">
 				<input disabled={true} placeholder="Espectros" />
 			</td>
-            <td/>
+			<td />
 		</tr>
-        <tr>
-			<td/>
+		<tr>
+			<td />
 			<td> Modo rotativo </td>
 			<td class="tesion-valor">
 				<input disabled={true} placeholder="Modo acoplado 2:1" />
 			</td>
-            <td/>
+			<td />
 		</tr>
-        <tr>
-			<td/>
+		<tr>
+			<td />
 			<td> Cristal </td>
 			<td class="tesion-valor">
 				<input disabled={true} placeholder="LiF" />
 			</td>
-            <td/>
+			<td />
 		</tr>
-        <tr>
-			<td/>
+		<tr>
+			<td />
 			<td> Absorbedor </td>
 			<td class="tesion-valor">
 				<input disabled={true} placeholder="Sin absorbedor" />
 			</td>
-            <td/>
+			<td />
 		</tr>
-        <tr>
-			<td/>
+		<tr>
+			<td />
 			<td> Filtro </td>
 			<td class="tesion-valor">
 				<input disabled={true} placeholder="Sin filtro" />
 			</td>
-            <td/>
+			<td />
 		</tr>
 	</table>
 </div>

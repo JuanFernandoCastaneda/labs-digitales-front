@@ -1,15 +1,15 @@
 <script lang="ts">
-	let tipo = 0;
+	import { practicaRayosX } from '$lib/stores/rayosX';
 </script>
 
 <div id="corriente-tiempo">
 	<h3>Corriente y tiempo</h3>
 	<table>
 		<tr>
-			<td/>
+			<td />
 			<td> Corriente de emis </td>
 			<td class="tesion-valor">
-				<input placeholder="1" type="number" />
+				<input required bind:value={$practicaRayosX.corriente} placeholder="1" type="number" />
 			</td>
 			<td> mA </td>
 		</tr>
@@ -17,7 +17,7 @@
 			<td />
 			<td> Tiempo de integración </td>
 			<td class="tesion-valor">
-				<input placeholder="2" type="number" />
+				<input required bind:value={$practicaRayosX.tiempo} placeholder="2" type="number" />
 			</td>
 			<td> s </td>
 		</tr>

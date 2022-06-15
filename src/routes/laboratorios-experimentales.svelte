@@ -34,15 +34,18 @@
 		if ($sesion) {
 			headers['Authorization'] = $sesion.token;
 		}
-		const peticion = await fetch(`${import.meta.env.VITE_BACKEND_URL}/maquinas${$sesion ? '' : '/anonimo'}`, {
-			method: 'POST',
-			headers,
-			body: JSON.stringify({
-				pagina: pagina - 1,
-				nombre,
-				departamento
-			})
-		});
+		const peticion = await fetch(
+			`${import.meta.env.VITE_BACKEND_URL}/maquinas${$sesion ? '' : '/anonimo'}`,
+			{
+				method: 'POST',
+				headers,
+				body: JSON.stringify({
+					pagina: pagina - 1,
+					nombre,
+					departamento
+				})
+			}
+		);
 		const respuesta = await peticion.json();
 		total = respuesta.total;
 		return respuesta.maquinas;
