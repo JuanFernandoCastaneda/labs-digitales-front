@@ -27,6 +27,7 @@
 	import CorrienteTiempo from '$lib/componentes/practica/corriente-tiempo.svelte';
 	import ParametrosFijos from '$lib/componentes/practica/parametros-fijos.svelte';
 	import { practicaRayosX, verificarPractica } from '$lib/stores/rayosX';
+import BarraDeCarga from '$lib/componentes/practica/barra-de-carga.svelte';
 
 	export let maquina: Maquina;
 
@@ -39,11 +40,12 @@
 			'Content-Type': 'application/json',
 			Authorization: $sesion.token
 		};
-		await fetch(`${import.meta.env.VITE_BACKEND_URL}/rayos_x/`, {
+		const respuesta = await fetch(`${import.meta.env.VITE_BACKEND_URL}/rayos_x/`, {
 			method: 'POST',
 			headers,
 			body: JSON.stringify($practicaRayosX)
 		});
+		console.log(await respuesta.text())
 	}
 </script>
 
@@ -59,10 +61,13 @@
 		<AnguloCristal />
 	</div>
 
+	<BarraDeCarga inicio={new Date()} fin={new Date(2022,5,15, 18, 14)}/>
+
 	<div id="botones">
 		<button on:click={computar}> Computar </button>
 	</div>
 </form>
+
 
 <style lang="scss">
 	h1 {
