@@ -27,25 +27,66 @@
 	import CorrienteTiempo from '$lib/componentes/practica/corriente-tiempo.svelte';
 	import ParametrosFijos from '$lib/componentes/practica/parametros-fijos.svelte';
 	import { practicaRayosX, verificarPractica } from '$lib/stores/rayosX';
-import BarraDeCarga from '$lib/componentes/practica/barra-de-carga.svelte';
+	import BarraDeCarga from '$lib/componentes/practica/barra-de-carga.svelte';
 
 	export let maquina: Maquina;
+	let calculando = false;
+	let inicio: Date;
+	let fin: Date;
 
 	async function computar(evento: Event) {
 		if (!verificarPractica($practicaRayosX) || !$sesion) {
 			return;
 		}
 		evento.preventDefault();
-		const headers: Record<string, string> = {
-			'Content-Type': 'application/json',
-			Authorization: $sesion.token
+		$practicaRayosX;
+		let espera = ($practicaRayosX.tiempo! + 1.5) * 1000;
+		if (
+			$practicaRayosX.angulo_parada !== undefined &&
+			$practicaRayosX.angulo_incremento !== undefined &&
+			$practicaRayosX.angulo_incremento !== 0
+		) {
+			espera *=
+				($practicaRayosX.angulo_parada - $practicaRayosX.angulo_arranque!) /
+					$practicaRayosX.angulo_incremento +
+				1;
+		}
+		if (
+			$practicaRayosX.tension_parada !== undefined &&
+			$practicaRayosX.tension_incremento !== undefined
+		) {
+			espera += 10000;
+			if ($practicaRayosX.tension_incremento !== 0) {
+				espera *=
+					($practicaRayosX.tension_parada - $practicaRayosX.tension_arranque!) /
+						$practicaRayosX.tension_incremento +
+					1;
+			}
+		}
+		espera += 20000 + 16500 + 15000;
+		inicio = new Date();
+		fin = new Date(inicio.getTime() + espera);
+		calculando = true;
+		const socket = new WebSocket(`${import.meta.env.VITE_WEBSOCKET_URL}/rayos_x/`);
+		socket.onopen = () => {
+			socket.send($sesion.token.slice(7));
+			socket.send(JSON.stringify(JSON.stringify($practicaRayosX)));
 		};
-		const respuesta = await fetch(`${import.meta.env.VITE_BACKEND_URL}/rayos_x/`, {
-			method: 'POST',
-			headers,
-			body: JSON.stringify($practicaRayosX)
-		});
-		console.log(await respuesta.text())
+		socket.onmessage = (evento) => {
+			if (evento.data === "401") {
+				socket.close();
+			}
+			console.log(evento.data)
+			var url = window.URL.createObjectURL(new Blob([evento.data]));
+			socket.close();
+			calculando = false;
+			var archivo = document.createElement('a');
+			archivo.href = url;
+			archivo.download = 'practica.xlsx';
+			document.body.appendChild(archivo);
+			archivo.click();
+			archivo.remove();
+		};
 	}
 </script>
 
@@ -60,14 +101,14 @@ import BarraDeCarga from '$lib/componentes/practica/barra-de-carga.svelte';
 		<CorrienteTiempo />
 		<AnguloCristal />
 	</div>
-
-	<BarraDeCarga inicio={new Date()} fin={new Date(2022,5,15, 18, 14)}/>
+	{#if calculando}
+		<BarraDeCarga {inicio} {fin} />
+	{/if}
 
 	<div id="botones">
 		<button on:click={computar}> Computar </button>
 	</div>
 </form>
-
 
 <style lang="scss">
 	h1 {
