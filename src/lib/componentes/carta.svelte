@@ -15,7 +15,9 @@
 		</span>
 	{/if}
 	<h2>{nombre}</h2>
-	<img alt={nombre} src={foto} />
+	<div>
+		<img alt={nombre} src={foto} />
+	</div>
 	<button on:click={() => (window.location.href = `/maquina/${id}`)}>Mas información</button>
 	<button>Reservar</button>
 	<button on:click={() => (window.location.href = `/practica/${id}`)}>Acceder</button>
@@ -35,7 +37,7 @@
 			margin: 0 0 20px 0;
 		}
 
-		& > img {
+		& > div > img {
 			margin: 0 auto 10px auto;
 			max-width: 80%;
 			height: 25vh;

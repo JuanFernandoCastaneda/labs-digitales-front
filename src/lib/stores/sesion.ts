@@ -12,6 +12,6 @@ function loginDesdeLocalStorage(): Sesion | undefined {
 	if (sesion !== null) return JSON.parse(sesion);
 }
 
-const sesion = writable(loginDesdeLocalStorage());
+const sesion = writable<Sesion | undefined>(loginDesdeLocalStorage());
 
 export { sesion };

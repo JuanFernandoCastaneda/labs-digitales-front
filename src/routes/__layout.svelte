@@ -1,6 +1,11 @@
 <script lang="ts">
 	import '../app.scss';
 	import { sesion } from '$lib/stores/sesion';
+
+	function cerrarSesion() {
+		localStorage.removeItem('sesion');
+		sesion.set(undefined);
+	}
 </script>
 
 <nav>
@@ -10,13 +15,14 @@
 				<img alt="Uniandes" height={30} src="/logo_uniandes.png" />
 			</a>
 			<a href="/"> Laboratorios digitales </a>
-			<a href="/opcion-1"> Opción 1 </a>
-			<a href="/opcion-2"> Opción 2 </a>
+			<!-- <a href="/opcion-1"> Opción 1 </a> -->
+			<!-- <a href="/opcion-2"> Opción 2 </a> -->
 			<a href="/laboratorios-experimentales"> Laboratorios experimentales </a>
 		</div>
 		<div id="nav-derecha">
 			{#if $sesion !== undefined}
 				<p>Bienvenido, {$sesion.nombreDeUsuario}</p>
+				<button on:click={cerrarSesion}>Cerrar sesión</button>
 			{:else}
 				<a href="/login"> Login </a>
 			{/if}
@@ -65,13 +71,8 @@
 				display: flex;
 			}
 		}
-	}
 
-	#nav-izquierda {
-		height: 100%;
-		margin-right: auto;
-
-		& > a {
+		& > div > div > a {
 			align-items: center;
 			color: inherit;
 			display: flex;
@@ -84,6 +85,14 @@
 				background-color: rgb(255, 255, 255);
 			}
 		}
+	}
+
+	#nav-izquierda {
+		height: 100%;
+		margin-right: auto;
+
+		& > a {
+		}
 
 		#logo {
 			background-color: rgb(255, 242, 0);
@@ -94,10 +103,13 @@
 		align-items: center;
 		display: flex;
 
-		& > a {
+		& > button {
 			align-items: center;
 			color: inherit;
+			background-color: inherit;
 			display: flex;
+			border: none;
+			cursor: pointer;
 			font-size: 15px;
 			height: 100%;
 			padding: 0 15px;
