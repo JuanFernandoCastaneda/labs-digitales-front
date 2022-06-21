@@ -15,8 +15,6 @@
 	let socket: WebSocket;
 
 	async function computar(evento: Event) {
-		console.log($practicaRayosX);
-
 		if (!verificarPractica($practicaRayosX) || !$sesion) {
 			return;
 		}

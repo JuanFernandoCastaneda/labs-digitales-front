@@ -25,7 +25,7 @@ const practicaRayosX = writable<PracticaRayosX>({
 });
 
 function verificarPractica(practica: PracticaRayosX): boolean {
-	if (practica.tension_constante === true) {
+	if (practica.tension_constante) {
 		practica.tension_incremento = undefined;
 		practica.tension_parada = undefined;
 	}
@@ -35,8 +35,7 @@ function verificarPractica(practica: PracticaRayosX): boolean {
 			verificacion &&
 			(elemento === 'tension_parada' ||
 				elemento === 'tension_incremento' ||
-				valor !== undefined ||
-				valor !== null);
+				(valor !== undefined && valor !== null));
 	}
 	return verificacion;
 }
