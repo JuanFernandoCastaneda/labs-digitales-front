@@ -9,9 +9,10 @@ interface PracticaRayosX {
 	tension_incremento: number | undefined;
 	angulo_parada: number | undefined;
 	angulo_incremento: number | undefined;
+	tension_constante: boolean;
 }
 
-const practicaRayosX = writable({
+const practicaRayosX = writable<PracticaRayosX>({
 	corriente: undefined,
 	tiempo: undefined,
 	tension_arranque: undefined,
@@ -19,15 +20,23 @@ const practicaRayosX = writable({
 	tension_parada: undefined,
 	tension_incremento: undefined,
 	angulo_parada: undefined,
-	angulo_incremento: undefined
+	angulo_incremento: undefined,
+	tension_constante: true
 });
 
 function verificarPractica(practica: PracticaRayosX): boolean {
+	if (practica.tension_constante === true) {
+		practica.tension_incremento = undefined;
+		practica.tension_parada = undefined;
+	}
 	let verificacion = true;
 	for (const [elemento, valor] of Object.entries(practica)) {
 		verificacion =
 			verificacion &&
-			(elemento === 'tension_parada' || elemento === 'tension_incremento' || valor !== undefined);
+			(elemento === 'tension_parada' ||
+				elemento === 'tension_incremento' ||
+				valor !== undefined ||
+				valor !== null);
 	}
 	return verificacion;
 }

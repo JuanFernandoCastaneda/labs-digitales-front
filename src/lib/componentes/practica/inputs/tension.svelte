@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { practicaRayosX } from '$lib/stores/rayosX';
-	let tipo = 0;
 </script>
 
 <div id="tension">
@@ -8,14 +7,14 @@
 	<table>
 		<tr>
 			<td>
-				<input bind:group={tipo} value={0} type="radio" />
+				<input bind:group={$practicaRayosX.tension_constante} value={true} type="radio" />
 			</td>
 			<td> Tensión constante </td>
 			<td class="tesion-valor">
 				<input
-					required={tipo === 0}
+					required={$practicaRayosX.tension_constante}
 					bind:value={$practicaRayosX.tension_arranque}
-					disabled={tipo !== 0}
+					disabled={!$practicaRayosX.tension_constante}
 					placeholder="30"
 					type="number"
 				/>
@@ -24,7 +23,7 @@
 		</tr>
 		<tr>
 			<td>
-				<input bind:group={tipo} value={1} type="radio" />
+				<input bind:group={$practicaRayosX.tension_constante} value={false} type="radio" />
 			</td>
 			<td> Tensión variable </td>
 			<td />
@@ -35,9 +34,9 @@
 			<td> Tensión máxima </td>
 			<td class="tesion-valor">
 				<input
-					required={tipo === 1}
+					required={!$practicaRayosX.tension_constante}
 					bind:value={$practicaRayosX.tension_parada}
-					disabled={tipo !== 1}
+					disabled={$practicaRayosX.tension_constante}
 					placeholder="35"
 					type="number"
 				/>
@@ -49,9 +48,9 @@
 			<td> Tensión mínima </td>
 			<td class="tesion-valor">
 				<input
-					required={tipo === 1}
+					required={!$practicaRayosX.tension_constante}
 					bind:value={$practicaRayosX.tension_arranque}
-					disabled={tipo !== 1}
+					disabled={$practicaRayosX.tension_constante}
 					placeholder="5"
 					type="number"
 				/>
@@ -63,9 +62,9 @@
 			<td> Incremento de tensión </td>
 			<td class="tesion-valor">
 				<input
-					required={tipo === 1}
+					required={!$practicaRayosX.tension_constante}
 					bind:value={$practicaRayosX.tension_incremento}
-					disabled={tipo !== 1}
+					disabled={$practicaRayosX.tension_constante}
 					placeholder="10"
 					type="number"
 				/>

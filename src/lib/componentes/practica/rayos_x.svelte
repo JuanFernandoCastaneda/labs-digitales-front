@@ -1,12 +1,12 @@
 <script lang="ts">
-	import Tension from '$lib/componentes/practica/tension.svelte';
+	import Tension from '$lib/componentes/practica/inputs/tension.svelte';
 	import type { Maquina } from '$lib/modelos/maquina';
 	import { sesion } from '$lib/stores/sesion';
 	import AnguloCristal from '$lib/componentes/practica/inputs/angulo-cristal.svelte';
 	import CorrienteTiempo from '$lib/componentes/practica/inputs/corriente-tiempo.svelte';
 	import ParametrosFijos from '$lib/componentes/practica/inputs/parametros-fijos.svelte';
 	import { practicaRayosX, verificarPractica } from '$lib/stores/rayosX';
-	import BarraDeCarga from '$lib/componentes/practica/inputs/barra-de-carga.svelte';
+	import BarraDeCarga from '$lib/componentes/practica/barra-de-carga.svelte';
 
 	export let maquina: Maquina;
 	let calculando = false;
@@ -15,6 +15,8 @@
 	let socket: WebSocket;
 
 	async function computar(evento: Event) {
+		console.log($practicaRayosX);
+
 		if (!verificarPractica($practicaRayosX) || !$sesion) {
 			return;
 		}
