@@ -22,6 +22,7 @@
 				token: `${token.tipo} ${token.token}`
 			});
 			localStorage.setItem('sesion', JSON.stringify($sesion));
+			location.pathname = '/';
 		}
 	}
 </script>

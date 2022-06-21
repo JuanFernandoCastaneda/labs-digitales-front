@@ -91,9 +91,6 @@
 		height: 100%;
 		margin-right: auto;
 
-		& > a {
-		}
-
 		#logo {
 			background-color: rgb(255, 242, 0);
 		}
